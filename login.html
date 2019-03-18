@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/login.css" />
+	</head>
+	<body>
+		<!--header部分-->
+		<div id="header">
+			<ul id="nav">
+				<li><a href="">乐蜂首页</a></li>
+				<li><a href="">快速导航<span id="icon"></span></a></li>
+				<li><a href="">收藏乐蜂</a></li>
+				<li>
+					<a href="">
+						<span id="phone"></span>手机乐蜂
+					</a>
+					<div id="lftwo">
+						<img src="img/loginImg/xz_icon_for_lf.jpg"/>
+						<div class="customer">
+							<div class="iphone"></div>
+							<div class="robit"></div>
+							<p>客户端</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="logo"></div>
+		<!--content部分-->
+		<div id="content">
+			<div id="box">
+				<div id="title">
+					<div class="titLeft">登录</div>
+					<div class="titRight"><a href="#">免费注册</a></div>
+				</div>
+				<div id="bot">
+					<form method="post" action="logincheck.php">
+						<p>账号</p>
+						<input id="userId" type="text"/>
+						<p>密码<span class="forget">忘记密码?</span></p>
+						<input id="userPass" type="text"/>
+						<p>验证码</p>
+						<input class="yanZhengMa" type="text"/>
+						<div id="rig">
+							<span id="check">ed54</span>
+							<a id="change" href="#">看不清？<br/>换一张</a>
+						</div>
+						<input type="submit" id="login" value="登录"/>
+						<hr />
+						<p>合作网站账号登录</p>
+						<p class="login">
+							<a href="#"><span class="weixin"></span><span class="wx">微信</span></a>
+							<a href="#"><span class="weibo"></span><span class="wb">微博</span></a>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="foot">
+			<div class="footer_bottom">
+				<a href="#">关于乐蜂</a>
+				<a href="#">免责声明</a>
+				<a href="#">隐私声明</a>
+				<a href="#">版权声明</a>
+				<a href="#">招聘信息</a>
+				<a href="#">联系我们</a>
+				<a href="#">帮助中心</a>
+				<a href="#">友情链接</a>
+			</div>
+			<div class="bit">
+				<div class="one">
+					<p class="copyRight">Copyright © 2008-2016 Lefeng.com All Rights Reserved. 天津品简电子商务有限公司
+						<span class="weight">津ICP备15005555号-1</span></p>
+					<p class="fotRight">京公网安备11010502034938号</p>
+					<p class="yingxiao">营销执照</p>
+				</div>
+				<p class="own">
+					<span class="name">公司全称：天津品简电子商务有限公司</span>
+					<span>公司固话：400 000 1818</span>
+					<span class="address">公司地址：天津市武清区京津电子商务产业园宏瑞道18号</span>
+				</p>
+				<div class="footer_imgs">
+					<a href="#"></a>
+					<a href="#"></a>
+					<a href="#"></a>
+					<a href="#"></a>
+					<a href="#"></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	window.onload=function(){
+		//判断密码的等级
+        let userPass =document.getElementById("userPass");
+        userPass.onkeydown=function(){
+          //1.密码不能为空
+
+		}
+	    //生成验证码
+	    let check=document.getElementById("check");
+	    check.onclick=function() {
+			createCode();
+        }
+
+        let change=document.getElementById("change");
+	    change.onclick=function(){
+            createCode();
+		}
+
+
+	}
+
+
+	//获取验证码
+	function createCode(){
+        var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G',
+            'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y',
+            'Z');//随机数
+
+        code = "";
+        var codeLength = 4;//验证码的长度
+
+        for(let i=0;i<codeLength;i++){
+            var index=Math.floor(Math.random()*36);
+            code=code+random[index];
+        }
+
+        check.innerText=code;
+    }
+</script>

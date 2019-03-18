@@ -1,0 +1,22 @@
+{
+  "name": "lefengnet",
+  "version": "1.0.0",
+  "description": "乐蜂网",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangchen1314521520/lefengnet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangchen1314521520/lefengnet/issues"
+  },
+  "homepage": "https://github.com/wangchen1314521520/lefengnet#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0"
+  }
+}
