@@ -168,7 +168,7 @@ input{
 	float: right;
 	color: #02b1cb;
 }
-#bot input{
+input{
 	width: 298px;
 	height: 32px;
 }
@@ -201,11 +201,11 @@ input{
 
 #login{
 	display: block;
-	width: 300px;
 	height: 40px;
-	line-height: 40px;
-	background-image: url(../img/loginImg/login-icon5.jpg);
-	background-position: 0px 196px;
+	line-height: 32px;
+	color: white;
+	font-weight: bold;
+	background: #de182f;
 	margin-top: 37px;
 	font-size: 14px;
 	text-align: center;

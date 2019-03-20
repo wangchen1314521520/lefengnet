@@ -33,28 +33,26 @@
 			<div id="box">
 				<div id="title">
 					<div class="titLeft">登录</div>
-					<div class="titRight"><a href="#">免费注册</a></div>
+					<div class="titRight"><a href="register.html">免费注册</a></div>
 				</div>
 				<div id="bot">
-					<form method="post" action="logincheck.php">
-						<p>账号</p>
-						<input id="userId" type="text"/>
-						<p>密码<span class="forget">忘记密码?</span></p>
-						<input id="userPass" type="text"/>
-						<p>验证码</p>
-						<input class="yanZhengMa" type="text"/>
-						<div id="rig">
-							<span id="check">ed54</span>
-							<a id="change" href="#">看不清？<br/>换一张</a>
-						</div>
-						<input type="submit" id="login" value="登录"/>
-						<hr />
-						<p>合作网站账号登录</p>
-						<p class="login">
-							<a href="#"><span class="weixin"></span><span class="wx">微信</span></a>
-							<a href="#"><span class="weibo"></span><span class="wb">微博</span></a>
-						</p>
-					</form>
+					<p>账号</p>
+					<input id="userTel" type="text"/>
+					<p>密码<span class="forget">忘记密码?</span></p>
+					<input id="userPassword" type="password"/>
+					<p>验证码</p>
+					<input class="yanZhengMa" type="text"/>
+					<div id="rig">
+						<span id="check"></span>
+						<a id="change" href="#">看不清？<br/>换一张</a>
+					</div>
+					<input type="submit" id="login" value="登录"/>
+					<hr />
+					<p>合作网站账号登录</p>
+					<p class="login">
+						<a href="#"><span class="weixin"></span><span class="wx">微信</span></a>
+						<a href="#"><span class="weibo"></span><span class="wb">微博</span></a>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -93,30 +91,82 @@
 	</body>
 </html>
 <script type="text/javascript">
-	window.onload=function(){
-		//判断密码的等级
-        let userPass =document.getElementById("userPass");
-        userPass.onkeydown=function(){
-          //1.密码不能为空
-
+	window.onload=function() {
+		//用户名不能为空
+       $("#userTel").onblur=function(){
+           if($("#userTel").value==""){
+               alert("亲，请输入用户名!");
+               return;
+           }
 		}
-	    //生成验证码
-	    let check=document.getElementById("check");
-	    check.onclick=function() {
-			createCode();
+		//密码不能为空
+        $("#userPassword").onblur=function(){
+            if($("#userPassword").value==""){
+                alert("亲，请输入密码!");
+                return;
+            }
         }
 
-        let change=document.getElementById("change");
-	    change.onclick=function(){
-            createCode();
-		}
+        //判断密码的等级
+        //     let userPass =document.getElementById("userPass");
+        //     userPass.onkeydown=function(){
+        //       //1.密码不能为空
+        //
+        // }
+			createCode();
+        //判断验证码是否输入正确
+        	let check=document.getElementById("check");
+			$(".yanZhengMa")[0].onblur=function(){
+				if((this.value)!=check.innerText) {
+					alert("亲，您看仔细呦,您输入的验证码不正确哦!");
+					return;
+				}
+			}
+
+		//生成验证码
+           check.onclick=function() {
+        	createCode();
+            }
+
+            let change=document.getElementById("change");
+           change.onclick=function(){
+                createCode();
+		   	}
+
+        //使用ajax链接后台
+        //登录成功跳转到首页
+        $("#login").onclick = function () {
+            if($(".yanZhengMa")[0].value==""){
+                alert("亲，请输入验证码!");
+                return;
+            }
+            //1、创建ajax核心对象XMLHttpRequest;
+            let xhr = new XMLHttpRequest();
+            //2、设置请求参数（请求方式，请求地址，同步哈市异步）
+            xhr.open("post", "logincheck.php", true);
+            //3、设置回调函数
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    //5.接收响应
+                    if (xhr.responseText == "1") {
+                        location.href = "index.html";
+                    } else {
+                        alert("登录失败，用户名和密码不符!");
+                    }
+                }
+            }
+
+            //设置请求头(post方式)，
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            let str = `userTel=${$("#userTel").value}&userPassword=${$("#userPassword").value}`;
+            // 4、发送请求
+            xhr.send(str);
+        }
 
 
-	}
-
-
-	//获取验证码
-	function createCode(){
+    }
+    //获取验证码
+    function createCode(){
         var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G',
             'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y',
             'Z');//随机数
@@ -130,5 +180,16 @@
         }
 
         check.innerText=code;
+    }
+
+
+    function $(str){
+        if(str.charAt(0)=="#"){
+            return document.getElementById(str.substring(1));
+        }else if(str.charAt(0)=="."){
+            return document.getElementsByClassName(str.substring(1));
+        }else{
+            return document.getElementsByTagName(str);
+        }
     }
 </script>

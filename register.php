@@ -2,7 +2,7 @@
 	header("Content-type:text/html;charset=utf-8");
 
 	//1、接收浏览器端的数据
-	$userTel=$_POST["userTel"];
+	$telphone=$_POST["telphone"];
 	$userPassword=$_POST["userPassword"];
 
 	//2、找数据库（先判断用户名有没有，再保存）
@@ -16,23 +16,20 @@
 		mysql_select_db("lfnet",$conn);
 
 		//2、传输数据（执行SQL语句）
-		$sqlstr="select * from login where telphone='$userTel' and userPass ='$userPassword'";
+		$sqlstr="insert into login(telphone,userPass)
+                	     values('$telphone','$userPassword')";;
 
 		// echo $sqlstr;
 
-	    $result=mysql_query($sqlstr,$conn);//查询语句的返回值是个表格
+	    $result=mysql_query($sqlstr,$conn);//
 
 		//3、关闭数据库
 	     mysql_close($conn);
 
-	     $rows = mysql_num_rows($result);
-
-	     if($rows==1){
-			//3、响应
-	     	echo "1";//登录成功！
-	     }else{
-			//3、响应
-	     	echo "0";//登录失败！
-	     }
+	    if($result>0){
+			echo "1";//注册成功！
+	    }else{
+			echo "0";//注册失败！
+	    }
 	}
 ?>
